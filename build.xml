@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="door" default="build">
+ <target name="build" depends="prepare,visualize,phpunit"/>
+
+ <target name="clean">
+  <delete dir="${basedir}/build/coverage"/>
+  <delete file="${basedir}/build/graph.dot"/>
+  <delete file="${basedir}/build/graph.pdf"/>
+ </target>
+
+ <target name="prepare" depends="clean,phpab">
+  <mkdir dir="${basedir}/build/coverage"/>
+ </target>
+
+ <target name="phpab">
+  <exec executable="phpab">
+   <arg value="--output" />
+   <arg path="src/autoload.php" />
+   <arg path="src" />
+  </exec>
+ </target>
+
+ <target name="visualize">
+  <exec executable="${basedir}/build/visualize.php" output="${basedir}/build/graph.dot"/>
+
+  <exec executable="dot">
+   <arg value="-Tpdf"/>
+   <arg value="-o"/>
+   <arg path="${basedir}/build/graph.pdf"/>
+   <arg path="${basedir}/build/graph.dot"/>
+  </exec>
+ </target>
+
+ <target name="phpunit">
+  <exec executable="phpunit" failonerror="true">
+   <arg value="--configuration"/>
+   <arg path="${basedir}/build/phpunit.xml"/>
+  </exec>
+ </target>
+</project>

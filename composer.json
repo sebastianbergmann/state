@@ -1,0 +1,6 @@
+{
+    "require": {
+        "phpunit/php-token-stream": "*",
+        "sebastian/finder-facade": "*"
+    }
+}
