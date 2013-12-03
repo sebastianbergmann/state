@@ -8,8 +8,12 @@
   <delete file="${basedir}/build/graph.pdf"/>
  </target>
 
- <target name="prepare" depends="clean,phpab">
+ <target name="prepare" depends="clean,generate,phpab">
   <mkdir dir="${basedir}/build/coverage"/>
+ </target>
+
+ <target name="generate">
+  <exec executable="${basedir}/build/generate.php"/>
  </target>
 
  <target name="phpab">
