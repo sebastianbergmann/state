@@ -32,15 +32,19 @@ while ($reader->read()) {
 $operations = array_unique($operations);
 $states     = array_unique($states);
 
-$buffer = "<?php\ninterface DoorInterface\n{";
+$abstractBuffer  = "<?php\nabstract class AbstractDoorState implements DoorInterface\n{";
+$interfaceBuffer = "<?php\ninterface DoorInterface\n{";
 
 foreach ($operations as $operation) {
-    $buffer .= sprintf("\n    public function %s();", $operation);
+    $abstractBuffer  .= sprintf("\n    /**\n     * @throws IllegalStateTransitionException\n     */\n    public function %s()\n    {\n        throw new IllegalStateTransitionException;\n    }\n", $operation);
+    $interfaceBuffer .= sprintf("\n    public function %s();", $operation);
 }
 
-$buffer .= "\n}";
+$abstractBuffer  .= "}";
+$interfaceBuffer .= "\n}";
 
-file_put_contents(__DIR__ . '/../src/DoorInterface.php', $buffer);
+file_put_contents(__DIR__ . '/../src/AbstractDoorState.php', $abstractBuffer);
+file_put_contents(__DIR__ . '/../src/DoorInterface.php', $interfaceBuffer);
 
 foreach ($states as $state) {
     $buffer = sprintf("<?php\nclass %s extends AbstractDoorState\n{", $state);
