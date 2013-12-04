@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 $states      = array();
+$operations  = array();
 $transitions = array();
 
 $reader = new XMLReader;
@@ -18,7 +19,8 @@ while ($reader->read()) {
     $to       = $reader->getAttribute('to');
     $states[] = $to;
 
-    $operation = $reader->getAttribute('operation');
+    $operation    = $reader->getAttribute('operation');
+    $operations[] = $operation;
 
     if (!isset($transitions[$from])) {
         $transitions[$from] = array();
@@ -27,7 +29,18 @@ while ($reader->read()) {
     $transitions[$from][$operation] = $to;
 }
 
-$states = array_unique($states);
+$operations = array_unique($operations);
+$states     = array_unique($states);
+
+$buffer = "<?php\ninterface DoorInterface\n{";
+
+foreach ($operations as $operation) {
+    $buffer .= sprintf("\n    public function %s();", $operation);
+}
+
+$buffer .= "\n}";
+
+file_put_contents(__DIR__ . '/../src/DoorInterface.php', $buffer);
 
 foreach ($states as $state) {
     $buffer = sprintf("<?php\nclass %s extends AbstractDoorState\n{", $state);
