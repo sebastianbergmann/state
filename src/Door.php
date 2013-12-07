@@ -11,26 +11,41 @@ class Door implements DoorInterface
         $this->setState($state);
     }
 
+    /**
+     * @throws IllegalStateTransitionException
+     */
     public function open()
     {
         $this->setState($this->state->open());
     }
 
+    /**
+     * @throws IllegalStateTransitionException
+     */
     public function close()
     {
         $this->setState($this->state->close());
     }
 
+    /**
+     * @throws IllegalStateTransitionException
+     */
     public function lock()
     {
         $this->setState($this->state->lock());
     }
 
+    /**
+     * @throws IllegalStateTransitionException
+     */
     public function unlock()
     {
         $this->setState($this->state->unlock());
     }
 
+    /**
+     * @return bool
+     */
     public function isOpen()
     {
         return $this->state instanceof OpenDoorState;
