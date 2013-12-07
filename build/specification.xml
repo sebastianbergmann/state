@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specification>
+ <states>
+  <state name="OpenDoorState" query="isOpen"/>
+  <state name="ClosedDoorState" query="isClosed"/>
+  <state name="LockedDoorState" query="isLocked"/>
+ </states>
+ <transitions>
+  <transition from="ClosedDoorState" to="OpenDoorState"   operation="open"/>
+  <transition from="OpenDoorState"   to="ClosedDoorState" operation="close"/>
+  <transition from="ClosedDoorState" to="LockedDoorState" operation="lock"/>
+  <transition from="LockedDoorState" to="ClosedDoorState" operation="unlock"/>
+ </transitions>
+</specification>
