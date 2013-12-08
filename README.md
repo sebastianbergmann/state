@@ -198,6 +198,12 @@ of the state machine as a directed graph in [Dot](http://graphviz.org) markup.
 
 ![Visualization of the Door state machine](build/graph.png)
 
+Static code analysis is, of course, not require to visualize the state machine
+as the visualization could also be generated based on its XML specification.
+However, generating the visualization based on the actual code has the
+advantage that is also works in the absence of an XML specification when the
+code is not generated automatically.
+
 ## Documenting the State Machine through Tests
 
 Using PHPUnit's [TestDox](http://phpunit.de/manual/current/en/other-uses-for-tests.html#other-uses-for-tests.agile-documentation)
