@@ -172,8 +172,13 @@ specification such as the one shown below:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <specification>
+ <configuration>
+  <class         name="Door"/>
+  <interface     name="DoorInterface"/>
+  <abstractClass name="AbstractDoorState"/>
+ </configuration>
  <states>
-  <state name="OpenDoorState" query="isOpen"/>
+  <state name="OpenDoorState"   query="isOpen"/>
   <state name="ClosedDoorState" query="isClosed"/>
   <state name="LockedDoorState" query="isLocked"/>
  </states>

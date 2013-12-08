@@ -15,8 +15,11 @@ use TheSeer\fDOM\fDOMDocument;
 $dom = new fDOMDocument;
 $dom->load(__DIR__ . '/specification.xml');
 
-$states     = array();
-$operations = array();
+$class         = $dom->queryOne('configuration/class')->getAttribute('name');
+$interface     = $dom->queryOne('configuration/interface')->getAttribute('name');
+$abstractClass = $dom->queryOne('configuration/abstractClass')->getAttribute('name');
+
+$states = array();
 
 foreach ($dom->query('states/state') as $state) {
     /** @var TheSeer\fDOM\fDOMElement $state */
@@ -25,6 +28,8 @@ foreach ($dom->query('states/state') as $state) {
         'query'       => $state->getAttribute('query')
     );
 }
+
+$operations = array();
 
 foreach ($dom->query('transitions/transition') as $transition) {
     /** @var TheSeer\fDOM\fDOMElement $transition*/
@@ -36,8 +41,8 @@ foreach ($dom->query('transitions/transition') as $transition) {
     $states[$from]['transitions'][$operation] = $to;
 }
 
-$abstractBuffer  = "<?php\nabstract class AbstractDoorState implements DoorInterface\n{";
-$interfaceBuffer = "<?php\ninterface DoorInterface\n{";
+$abstractBuffer  = sprintf("<?php\nabstract class %s implements %s\n{", $abstractClass, $interface);
+$interfaceBuffer = sprintf("<?php\ninterface %s\n{", $interface);
 
 foreach ($operations as $operation) {
     $abstractBuffer  .= sprintf("\n    /**\n     * @throws IllegalStateTransitionException\n     */\n    public function %s()\n    {\n        throw new IllegalStateTransitionException;\n    }\n", $operation);
@@ -47,11 +52,11 @@ foreach ($operations as $operation) {
 $abstractBuffer  .= "}";
 $interfaceBuffer .= "\n}";
 
-file_put_contents(__DIR__ . '/../src/AbstractDoorState.php', $abstractBuffer);
-file_put_contents(__DIR__ . '/../src/DoorInterface.php', $interfaceBuffer);
+file_put_contents(__DIR__ . '/../src/' . $abstractClass . '.php', $abstractBuffer);
+file_put_contents(__DIR__ . '/../src/' . $interface . '.php', $interfaceBuffer);
 
 foreach ($states as $state => $data) {
-    $buffer = sprintf("<?php\nclass %s extends AbstractDoorState\n{", $state);
+    $buffer = sprintf("<?php\nclass %s extends %s\n{", $state, $abstractClass);
 
     foreach ($data['transitions'] as $operation => $to) {
         $buffer .= sprintf("\n    /**\n     * @return %s\n     */\n    public function %s()\n    {\n        return new %s;\n    }\n", $to, $operation, $to);
@@ -62,7 +67,7 @@ foreach ($states as $state => $data) {
     file_put_contents(__DIR__ . '/../src/' . $state . '.php', $buffer);
 }
 
-$buffer = "<?php\nclass Door implements DoorInterface\n{\n    /**\n     * @var DoorInterface\n     */\n    private \$state;\n\n    public function __construct(DoorInterface \$state)\n    {\n        \$this->setState(\$state);\n    }\n";
+$buffer = sprintf("<?php\nclass %s implements %s\n{\n    /**\n     * @var %s\n     */\n    private \$state;\n\n    public function __construct(%s \$state)\n    {\n        \$this->setState(\$state);\n    }\n", $class, $interface, $interface, $interface);
 
 foreach ($operations as $operation) {
     $buffer .= sprintf("\n    /**\n     * @throws IllegalStateTransitionException\n     */\n    public function %s()\n    {\n        \$this->setState(\$this->state->%s());\n    }\n", $operation, $operation);
@@ -72,6 +77,6 @@ foreach ($states as $state => $data) {
     $buffer .= sprintf("\n    /**\n     * @return bool\n     */\n    public function %s()\n    {\n        return \$this->state instanceof %s;\n    }\n", $data['query'], $state);
 }
 
-$buffer .= "\n    private function setState(DoorInterface \$state)\n    {\n        \$this->state = \$state;\n    }\n}";
+$buffer .= sprintf("\n    private function setState(%s \$state)\n    {\n        \$this->state = \$state;\n    }\n}", $interface);
 
-file_put_contents(__DIR__ . '/../src/Door.php', $buffer);
+file_put_contents(__DIR__ . '/../src/' . $class . '.php', $buffer);
