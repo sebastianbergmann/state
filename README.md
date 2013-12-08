@@ -198,7 +198,7 @@ of the state machine as a directed graph in [Dot](http://graphviz.org) markup.
 
 ![Visualization of the Door state machine](build/graph.png)
 
-Static code analysis is, of course, not require to visualize the state machine
+Static code analysis is, of course, not required to visualize the state machine
 as the visualization could also be generated based on its XML specification.
 However, generating the visualization based on the actual code has the
 advantage that is also works in the absence of an XML specification when the
