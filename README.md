@@ -186,6 +186,18 @@ specification such as the one shown below:
 </specification>
 ```
 
+## Visualizing the State Machine
+
+Using static code analysis we can automatically find all child classes of the
+`AbstractDoorState` class. By looking at the `@return` annotations of `open()`,
+`close()`, `lock()`, and `unlock()` methods of these classes we can figure the
+transitions that are allowed from the state represented by these classes.
+
+The `visualize.php` script implements this approach to generate a representation
+of the state machine as a directed graph in [Dot](http://graphviz.org) markup.
+
+![Visualization of the Door state machine](build/graph.png)
+
 ## Documenting the State Machine through Tests
 
 Using PHPUnit's [TestDox](http://phpunit.de/manual/current/en/other-uses-for-tests.html#other-uses-for-tests.agile-documentation)
@@ -212,15 +224,3 @@ machine based on its tests:
 
 This automatically generated checklist makes it clear which transitions are
 allowed between the three states of the state machine.
-
-## Visualizing the State Machine
-
-Using static code analysis we can automatically find all child classes of the
-`AbstractDoorState` class. By looking at the `@return` annotations of `open()`,
-`close()`, `lock()`, and `unlock()` methods of these classes we can figure the
-transitions that are allowed from the state represented by these classes.
-
-The `visualize.php` script implements this approach to generate a representation
-of the state machine as a directed graph in [Dot](http://graphviz.org) markup.
-
-![Visualization of the Door state machine](build/graph.png)
