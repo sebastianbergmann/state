@@ -213,7 +213,7 @@ machine based on its tests:
 This automatically generated checklist makes it clear which transitions are
 allowed between the three states of the state machine.
 
-## Visualizing the State Machine using Static Analysis
+## Visualizing the State Machine
 
 Using static code analysis we can automatically find all child classes of the
 `AbstractDoorState` class. By looking at the `@return` annotations of `open()`,
