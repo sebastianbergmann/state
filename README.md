@@ -222,3 +222,5 @@ transitions that are allowed from the state represented by these classes.
 
 The `visualize.php` script implements this approach to generate a representation
 of the state machine as a directed graph in [Dot](http://graphviz.org) markup.
+
+![Visualization of the Door state machine](build/graph.png)
