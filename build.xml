@@ -28,9 +28,9 @@
   <exec executable="${basedir}/build/visualize.php" output="${basedir}/build/graph.dot"/>
 
   <exec executable="dot">
-   <arg value="-Tpdf"/>
+   <arg value="-Tpng"/>
    <arg value="-o"/>
-   <arg path="${basedir}/build/graph.pdf"/>
+   <arg path="${basedir}/build/graph.png"/>
    <arg path="${basedir}/build/graph.dot"/>
   </exec>
  </target>
