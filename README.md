@@ -164,6 +164,28 @@ The example script above yields the output below:
     #2 {main}
       thrown in AbstractDoorState.php on line 25
 
+## Generating the State Machine
+
+The `generate.php` script can generate the code shown above from an XML
+specification such as the one shown below:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<specification>
+ <states>
+  <state name="OpenDoorState" query="isOpen"/>
+  <state name="ClosedDoorState" query="isClosed"/>
+  <state name="LockedDoorState" query="isLocked"/>
+ </states>
+ <transitions>
+  <transition from="ClosedDoorState" to="OpenDoorState"   operation="open"/>
+  <transition from="OpenDoorState"   to="ClosedDoorState" operation="close"/>
+  <transition from="ClosedDoorState" to="LockedDoorState" operation="lock"/>
+  <transition from="LockedDoorState" to="ClosedDoorState" operation="unlock"/>
+ </transitions>
+</specification>
+```
+
 ## Documenting the State Machine through Tests
 
 Using PHPUnit's [TestDox](http://phpunit.de/manual/current/en/other-uses-for-tests.html#other-uses-for-tests.agile-documentation)
