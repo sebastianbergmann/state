@@ -1,3 +1,4 @@
+/.ant_targets
 /.idea
 /build/coverage
 /build/graph.*
