@@ -133,6 +133,37 @@ The `Door` class forwards all state-specific messages to this state object.
 Whenever the door changes state, the `Door` object changes the state object it
 uses.
 
+### Usage Example
+
+```php
+<?php
+require __DIR__ . '/src/autoload.php';
+
+$door = new Door(new OpenDoorState);
+var_dump($door->isOpen());
+
+$door->close();
+var_dump($door->isClosed());
+
+$door->lock();
+var_dump($door->isLocked());
+
+$door->lock();
+```
+
+The example script above yields the output below:
+
+    bool(true)
+    bool(true)
+    bool(true)
+
+    Fatal error: Uncaught exception 'IllegalStateTransitionException' in AbstractDoorState.php:25
+    Stack trace:
+    #0 Door.php(35): AbstractDoorState->lock()
+    #1 example.php(13): Door->lock()
+    #2 {main}
+      thrown in AbstractDoorState.php on line 25
+
 ## Documenting the State Machine through Tests
 
 Using PHPUnit's [TestDox](http://phpunit.de/manual/current/en/other-uses-for-tests.html#other-uses-for-tests.agile-documentation)
