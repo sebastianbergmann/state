@@ -167,8 +167,8 @@ The example script above yields the output below:
 ## Documenting the State Machine through Tests
 
 Using PHPUnit's [TestDox](http://phpunit.de/manual/current/en/other-uses-for-tests.html#other-uses-for-tests.agile-documentation)
-feature we can automatically generate documentation for the state machine based
-on its tests:
+functionality we can automatically generate documentation for the state
+machine based on its tests:
 
     OpenDoor
      [x] Can be closed
