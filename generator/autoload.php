@@ -13,7 +13,8 @@ spl_autoload_register(
                 'interfacegenerator' => '/InterfaceGenerator.php',
                 'specificationfilename' => '/SpecificationFilename.php',
                 'specificationparser' => '/SpecificationParser.php',
-                'stateclassgenerator' => '/StateClassGenerator.php'
+                'stateclassgenerator' => '/StateClassGenerator.php',
+                'templatefilename' => '/TemplateFilename.php'
             );
         }
         $cn = strtolower($class);

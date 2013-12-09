@@ -8,21 +8,32 @@ class AbstractStateClassGenerator
      */
     public function generate(array $specification, $abstractClassName, $interfaceName)
     {
-        $buffer = sprintf(
-            "<?php\nabstract class %s implements %s\n{",
-            $abstractClassName,
-            $interfaceName
-        );
+        $buffer   = '';
+        $template = file_get_contents(new TemplateFilename('AbstractStateClassMethod'));
 
         foreach ($specification['operations'] as $operation => $data) {
-            $buffer .= sprintf(
-                "\n    /**\n     * @throws IllegalStateTransitionException\n     */\n    public function %s()\n    {\n        throw new IllegalStateTransitionException;\n    }\n",
-                $operation
+            $buffer .= str_replace(
+                '___METHOD___',
+                $operation,
+                $template
             );
         }
 
-        $buffer .= "}";
-
-        file_put_contents(new CodeFilename($abstractClassName), $buffer);
+        file_put_contents(
+            new CodeFilename($abstractClassName),
+            str_replace(
+                array(
+                    '___ABSTRACT___',
+                    '___INTERFACE___',
+                    '___METHODS___'
+                ),
+                array(
+                    $abstractClassName,
+                    $interfaceName,
+                    $buffer
+                ),
+                file_get_contents(new TemplateFilename('AbstractStateClass'))
+            )
+        );
     }
 }
