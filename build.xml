@@ -13,14 +13,20 @@
  </target>
 
  <target name="generate">
-  <exec executable="${basedir}/build/generate.php"/>
+  <exec executable="${basedir}/generator/run.php"/>
  </target>
 
  <target name="phpab">
   <exec executable="phpab">
    <arg value="--output" />
-   <arg path="src/autoload.php" />
-   <arg path="src" />
+   <arg path="example/src/autoload.php" />
+   <arg path="example/src" />
+  </exec>
+
+  <exec executable="phpab">
+   <arg value="--output" />
+   <arg path="generator/autoload.php" />
+   <arg path="generator" />
   </exec>
  </target>
 

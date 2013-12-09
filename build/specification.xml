@@ -16,4 +16,10 @@
   <transition from="ClosedDoorState" to="LockedDoorState" operation="lock"/>
   <transition from="LockedDoorState" to="ClosedDoorState" operation="unlock"/>
  </transitions>
+ <operations>
+  <operation name="open"   allowed="canBeOpened"   disallowed="cannotBeOpened"/>
+  <operation name="close"  allowed="canBeClosed"   disallowed="cannotBeClosed"/>
+  <operation name="lock"   allowed="canBeLocked"   disallowed="cannotBeLocked"/>
+  <operation name="unlock" allowed="canBeUnlocked" disallowed="cannotBeUnlocked"/>
+ </operations>
 </specification>

@@ -12,7 +12,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use SebastianBergmann\FinderFacade\FinderFacade;
 
-$finder = new FinderFacade(array(__DIR__ . '/../src'), array(), array('*.php'));
+$finder = new FinderFacade(array(__DIR__ . '/../example/src'), array(), array('*.php'));
 
 print 'digraph G {' . PHP_EOL;
 

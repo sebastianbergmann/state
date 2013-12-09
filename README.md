@@ -21,8 +21,9 @@ states of the door.
 
 ### DoorInterface
 
-The `DoorInterface` interface declares an interface common to all classes that
-represent different states.
+The `DoorInterface` interface ([source](example/src/DoorInterface.php))
+declares an interface common to all classes that represent different
+states.
 
 ```php
 <?php
@@ -37,9 +38,9 @@ interface DoorInterface
 
 ### AbstractDoorState
 
-The `AbstractDoorState` class implements the operations required by the
-`DoorInterface` interface in such a way that all methods raise an
-`IllegalStateTransitionException` by default.
+The `AbstractDoorState` class ([source](example/src/AbstractDoorState.php))
+implements the operations required by the `DoorInterface` interface in such
+a way that all methods raise an `IllegalStateTransitionException` by default.
 
 ```php
 <?php
@@ -69,11 +70,13 @@ abstract class AbstractDoorState implements DoorInterface
 
 ### OpenDoorState, ClosedDoorState, and LockedDoorState
 
-`OpenDoorState`, `ClosedDoorState`, and `LockedDoorState` are child classes of
-`AbstractDoorState` that overwrite the `open()`, `close()`, `lock()`, and
-`unlock()` methods appropriately to return the object that represents the new
-state. `OpenDoorState::close()` returns an instance of `ClosedDoorState`, for
-instance:
+`OpenDoorState` ([source](example/src/OpenDoorState.php)),
+`ClosedDoorState` ([source](example/src/ClosedDoorState.php)),
+and `LockedDoorState` ([source](example/src/LockedDoorState.php)) are child
+classes of `AbstractDoorState` that overwrite the `open()`, `close()`, `lock()`,
+and `unlock()` methods appropriately to return the object that represents the
+new state. `OpenDoorState::close()` returns an instance of `ClosedDoorState`,
+for instance:
 
 ```php
 <?php
@@ -88,8 +91,9 @@ class OpenDoorState extends AbstractDoorState
 
 ### Door
 
-The `Door` class maintains a state object (an instance of a subclass of
-`AbstractDoorState`) that represents the current state of the door:
+The `Door` class ([source](example/src/Door.php)) maintains a state object (an
+instance of a subclass of `AbstractDoorState`) that represents the current
+state of the door:
 
 ```php
 <?php
@@ -166,8 +170,8 @@ The example script above yields the output below:
 
 ## Generating the State Machine
 
-The `generate.php` script can generate the code shown above from an XML
-specification such as the one shown below:
+Using a ([code generator](generator/run.php)), the code shown above can be
+automatically generated from an XML specification such as the one shown below:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -188,6 +192,12 @@ specification such as the one shown below:
   <transition from="ClosedDoorState" to="LockedDoorState" operation="lock"/>
   <transition from="LockedDoorState" to="ClosedDoorState" operation="unlock"/>
  </transitions>
+ <operations>
+  <operation name="open"   allowed="canBeOpened"   disallowed="cannotBeOpened"/>
+  <operation name="close"  allowed="canBeClosed"   disallowed="cannotBeClosed"/>
+  <operation name="lock"   allowed="canBeLocked"   disallowed="cannotBeLocked"/>
+  <operation name="unlock" allowed="canBeUnlocked" disallowed="cannotBeUnlocked"/>
+ </operations>
 </specification>
 ```
 
@@ -198,8 +208,9 @@ Using static code analysis we can automatically find all child classes of the
 `close()`, `lock()`, and `unlock()` methods of these classes we can figure the
 transitions that are allowed from the state represented by these classes.
 
-The `visualize.php` script implements this approach to generate a representation
-of the state machine as a directed graph in [Dot](http://graphviz.org) markup.
+The `visualize.php` ([source](build/visualize.php)) script implements this
+approach to generate a representation of the state machine as a directed graph
+in [Dot](http://graphviz.org) markup.
 
 ![Visualization of the Door state machine](build/graph.png)
 
