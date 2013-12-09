@@ -170,7 +170,7 @@ The example script above yields the output below:
 
 ## Generating the State Machine
 
-Using a ([code generator](generator/run.php)), the code shown above can be
+Using a [code generator](generator/run.php), the code shown above can be
 automatically generated from an XML specification such as the one shown below:
 
 ```xml
