@@ -6,6 +6,6 @@ class SpecificationFilename
      */
     public function __toString()
     {
-        return __DIR__ . '/../build/specification.xml';
+        return __DIR__ . '/../../build/specification.xml';
     }
 }

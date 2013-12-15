@@ -19,6 +19,6 @@ class CodeFilename
      */
     public function __toString()
     {
-        return __DIR__ . '/../example/src/' . $this->unitName . '.php';
+        return __DIR__ . '/../../example/src/' . $this->unitName . '.php';
     }
 }

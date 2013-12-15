@@ -9,12 +9,12 @@ spl_autoload_register(
             $classes = array(
                 'abstractstateclassgenerator' => '/AbstractStateClassGenerator.php',
                 'classgenerator' => '/ClassGenerator.php',
-                'codefilename' => '/CodeFilename.php',
+                'codefilename' => '/Filename/CodeFilename.php',
                 'interfacegenerator' => '/InterfaceGenerator.php',
-                'specificationfilename' => '/SpecificationFilename.php',
+                'specificationfilename' => '/Filename/SpecificationFilename.php',
                 'specificationparser' => '/SpecificationParser.php',
                 'stateclassgenerator' => '/StateClassGenerator.php',
-                'templatefilename' => '/TemplateFilename.php'
+                'templatefilename' => '/Filename/TemplateFilename.php'
             );
         }
         $cn = strtolower($class);

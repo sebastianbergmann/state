@@ -19,6 +19,6 @@ class TemplateFilename
      */
     public function __toString()
     {
-        return __DIR__ . '/templates/' . $this->name . '.tpl';
+        return __DIR__ . '/../templates/' . $this->name . '.tpl';
     }
 }
