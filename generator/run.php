@@ -12,22 +12,26 @@ require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/autoload.php';
 
 $parser            = new SpecificationParser(new SpecificationFilename);
-$specification     = $parser->getSpecification();
 $className         = $parser->getClassName();
 $abstractClassName = $parser->getAbstractClassName();
 $interfaceName     = $parser->getInterfaceClassName();
+$operations        = $parser->getOperations();
+$queries           = $parser->getQueries();
+$states            = $parser->getStates();
 
 $generator = new InterfaceGenerator;
-$generator->generate($specification, $interfaceName);
+$generator->generate($operations, $interfaceName);
 
 $generator = new AbstractStateClassGenerator;
-$generator->generate($specification, $abstractClassName, $interfaceName);
+$generator->generate($operations, $abstractClassName, $interfaceName);
 
 $generator = new ClassGenerator;
-$generator->generate($specification, $className, $interfaceName);
+$generator->generate($operations, $states, $className, $interfaceName);
 
-$generator = new StateClassGenerator;
+$codeGenerator = new StateClassGenerator;
+$testGenerator = new TestGenerator;
 
-foreach ($specification['states'] as $state => $data) {
-    $generator->generate($data, $state, $abstractClassName);
+foreach ($states as $state => $data) {
+    $codeGenerator->generate($data, $state, $abstractClassName);
+    $testGenerator->generate($data, $operations, $queries, $states, $state, $className, $abstractClassName);
 }

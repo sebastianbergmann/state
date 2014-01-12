@@ -14,7 +14,9 @@ spl_autoload_register(
                 'specificationfilename' => '/Filename/SpecificationFilename.php',
                 'specificationparser' => '/SpecificationParser.php',
                 'stateclassgenerator' => '/StateClassGenerator.php',
-                'templatefilename' => '/Filename/TemplateFilename.php'
+                'templatefilename' => '/Filename/TemplateFilename.php',
+                'testfilename' => '/Filename/TestFilename.php',
+                'testgenerator' => '/TestGenerator.php'
             );
         }
         $cn = strtolower($class);

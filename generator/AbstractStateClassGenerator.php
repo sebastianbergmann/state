@@ -2,16 +2,16 @@
 class AbstractStateClassGenerator
 {
     /**
-     * @param array $specification
+     * @param array  $operations
      * @param string $abstractClassName
      * @param string $interfaceName
      */
-    public function generate(array $specification, $abstractClassName, $interfaceName)
+    public function generate(array $operations, $abstractClassName, $interfaceName)
     {
         $buffer   = '';
         $template = file_get_contents(new TemplateFilename('AbstractStateClassMethod'));
 
-        foreach ($specification['operations'] as $operation => $data) {
+        foreach ($operations as $operation => $data) {
             $buffer .= str_replace(
                 '___METHOD___',
                 $operation,

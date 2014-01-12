@@ -40,16 +40,6 @@ class LockedDoorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Door::close
-     * @covers AbstractDoorState::close
-     * @expectedException IllegalStateTransitionException
-     */
-    public function testCannotBeClosed()
-    {
-        $this->door->close();
-    }
-
-    /**
      * @covers Door::open
      * @covers AbstractDoorState::open
      * @expectedException IllegalStateTransitionException
@@ -57,6 +47,16 @@ class LockedDoorTest extends PHPUnit_Framework_TestCase
     public function testCannotBeOpened()
     {
         $this->door->open();
+    }
+
+    /**
+     * @covers Door::close
+     * @covers AbstractDoorState::close
+     * @expectedException IllegalStateTransitionException
+     */
+    public function testCannotBeClosed()
+    {
+        $this->door->close();
     }
 
     /**
@@ -76,6 +76,6 @@ class LockedDoorTest extends PHPUnit_Framework_TestCase
     public function testCanBeUnlocked()
     {
         $this->door->unlock();
-        $this->assertFalse($this->door->isLocked());
+        $this->assertTrue($this->door->isClosed());
     }
 }

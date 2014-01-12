@@ -40,16 +40,6 @@ class OpenDoorTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Door::close
-     * @covers OpenDoorState::close
-     */
-    public function testCanBeClosed()
-    {
-        $this->door->close();
-        $this->assertTrue($this->door->isClosed());
-    }
-
-    /**
      * @covers Door::open
      * @covers AbstractDoorState::open
      * @expectedException IllegalStateTransitionException
@@ -57,6 +47,16 @@ class OpenDoorTest extends PHPUnit_Framework_TestCase
     public function testCannotBeOpened()
     {
         $this->door->open();
+    }
+
+    /**
+     * @covers Door::close
+     * @covers OpenDoorState::close
+     */
+    public function testCanBeClosed()
+    {
+        $this->door->close();
+        $this->assertTrue($this->door->isClosed());
     }
 
     /**

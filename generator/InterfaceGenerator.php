@@ -2,15 +2,15 @@
 class InterfaceGenerator
 {
     /**
-     * @param array $specification
+     * @param array $operations
      * @param string $interfaceName
      */
-    public function generate(array $specification, $interfaceName)
+    public function generate(array $operations, $interfaceName)
     {
         $buffer   = '';
         $template = file_get_contents(new TemplateFilename('InterfaceMethod'));
 
-        foreach (array_keys($specification['operations']) as $operation) {
+        foreach (array_keys($operations) as $operation) {
             $buffer .= str_replace('___METHOD___', $operation, $template);
         }
 
