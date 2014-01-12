@@ -72,6 +72,7 @@ class LockedDoorTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Door::unlock
      * @covers LockedDoorState::unlock
+     * @uses   Door::isClosed
      */
     public function testCanBeUnlocked()
     {

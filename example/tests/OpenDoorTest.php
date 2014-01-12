@@ -52,6 +52,7 @@ class OpenDoorTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Door::close
      * @covers OpenDoorState::close
+     * @uses   Door::isClosed
      */
     public function testCanBeClosed()
     {

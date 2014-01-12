@@ -42,6 +42,7 @@ class ClosedDoorTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Door::open
      * @covers ClosedDoorState::open
+     * @uses   Door::isOpen
      */
     public function testCanBeOpened()
     {
@@ -62,6 +63,7 @@ class ClosedDoorTest extends PHPUnit_Framework_TestCase
     /**
      * @covers Door::lock
      * @covers ClosedDoorState::lock
+     * @uses   Door::isLocked
      */
     public function testCanBeLocked()
     {
