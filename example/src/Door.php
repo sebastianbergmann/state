@@ -1,5 +1,5 @@
 <?php
-class Door implements DoorInterface
+class Door
 {
     /**
      * @var DoorInterface

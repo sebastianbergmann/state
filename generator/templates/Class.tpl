@@ -1,5 +1,5 @@
 <?php
-class ___CLASS___ implements ___INTERFACE___
+class ___CLASS___
 {
     /**
      * @var ___INTERFACE___

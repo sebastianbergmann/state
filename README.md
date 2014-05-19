@@ -97,7 +97,7 @@ state of the door:
 
 ```php
 <?php
-class Door implements DoorInterface
+class Door
 {
     private $state;
 
