@@ -2,7 +2,7 @@
 <specification>
  <configuration>
   <class         name="Door"/>
-  <interface     name="DoorInterface"/>
+  <interface     name="DoorState"/>
   <abstractClass name="AbstractDoorState"/>
  </configuration>
  <states>

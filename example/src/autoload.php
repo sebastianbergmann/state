@@ -10,7 +10,7 @@ spl_autoload_register(
                 'abstractdoorstate' => '/AbstractDoorState.php',
                 'closeddoorstate' => '/ClosedDoorState.php',
                 'door' => '/Door.php',
-                'doorinterface' => '/DoorInterface.php',
+                'doorstate' => '/DoorState.php',
                 'illegalstatetransitionexception' => '/IllegalStateTransitionException.php',
                 'lockeddoorstate' => '/LockedDoorState.php',
                 'opendoorstate' => '/OpenDoorState.php'

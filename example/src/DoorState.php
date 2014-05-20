@@ -1,5 +1,5 @@
 <?php
-interface DoorInterface
+interface DoorState
 {
     public function open();
     public function close();

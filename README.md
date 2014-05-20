@@ -19,15 +19,14 @@ pattern describes how a `Door` object can exhibit different behavior in each
 state. The key idea in this pattern is to introduce classes to represent the
 states of the door.
 
-### DoorInterface
+### DoorState
 
-The `DoorInterface` interface ([source](example/src/DoorInterface.php))
-declares an interface common to all classes that represent different
-states.
+The `DoorState` interface ([source](example/src/DoorState.php)) declares an
+interface common to all classes that represent different states.
 
 ```php
 <?php
-interface DoorInterface
+interface DoorState
 {
     public function open();
     public function close();
@@ -39,12 +38,12 @@ interface DoorInterface
 ### AbstractDoorState
 
 The `AbstractDoorState` class ([source](example/src/AbstractDoorState.php))
-implements the operations required by the `DoorInterface` interface in such
-a way that all methods raise an `IllegalStateTransitionException` by default.
+implements the operations required by the `DoorState` interface in such a way
+that all methods raise an `IllegalStateTransitionException` by default.
 
 ```php
 <?php
-abstract class AbstractDoorState implements DoorInterface
+abstract class AbstractDoorState implements DoorState
 {
     public function open()
     {
@@ -101,7 +100,7 @@ class Door
 {
     private $state;
 
-    public function __construct(DoorInterface $state)
+    public function __construct(DoorState $state)
     {
         $this->setState($state);
     }
@@ -126,7 +125,7 @@ class Door
         $this->setState($this->state->unlock());
     }
 
-    private function setState(DoorInterface $state)
+    private function setState(DoorState $state)
     {
         $this->state = $state;
     }
@@ -178,7 +177,7 @@ automatically generated from an XML specification such as the one shown below:
 <specification>
  <configuration>
   <class         name="Door"/>
-  <interface     name="DoorInterface"/>
+  <interface     name="DoorState"/>
   <abstractClass name="AbstractDoorState"/>
  </configuration>
  <states>

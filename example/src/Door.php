@@ -2,11 +2,11 @@
 class Door
 {
     /**
-     * @var DoorInterface
+     * @var DoorState
      */
     private $state;
 
-    public function __construct(DoorInterface $state)
+    public function __construct(DoorState $state)
     {
         $this->setState($state);
     }
@@ -67,7 +67,7 @@ class Door
         return $this->state instanceof LockedDoorState;
     }
 
-    private function setState(DoorInterface $state)
+    private function setState(DoorState $state)
     {
         $this->state = $state;
     }

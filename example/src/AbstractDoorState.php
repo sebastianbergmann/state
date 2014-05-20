@@ -1,5 +1,5 @@
 <?php
-abstract class AbstractDoorState implements DoorInterface
+abstract class AbstractDoorState implements DoorState
 {
     /**
      * @throws IllegalStateTransitionException
