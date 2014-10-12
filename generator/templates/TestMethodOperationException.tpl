@@ -6,5 +6,5 @@
      */
     public function test___TEST___()
     {
-        $this->door->___OPERATION___();
+        $this->___OBJECT___->___OPERATION___();
     }
